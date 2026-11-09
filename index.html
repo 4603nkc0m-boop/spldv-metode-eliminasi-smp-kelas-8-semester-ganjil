@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Belajar SPLDV Metode Eliminasi - Agung Nugroho, S.Pd., Gr</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0284c7',
+                        primaryDark: '#0369a1',
+                        accent: '#38bdf8',
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                        darkBg: '#0f172a'
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .hero-pattern { background: radial-gradient(circle at 50% 50%, #0369a1 0%, #0f172a 100%); }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col justify-between custom-scrollbar">
+
+    <!-- KONFIGURASI GOOGLE APPS SCRIPT (GAS) ENDPOINT -->
+    <script>
+        const GAS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx1ddQTBO7TWZxJLcpT0ZuObiDTnHam03GIYgMPgBohY5_3T7D0VFI008V-SfaUZcOSbA/exec";
+    </script>
+
+    <!-- HEADER & NAVBAR -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-800 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-white font-extrabold text-2xl shadow-lg shadow-primary/30">
+                    AN
+                </div>
+                <div>
+                    <h1 class="text-white font-bold text-base sm:text-lg tracking-tight">Matematika SMP Kelas 8</h1>
+                    <p class="text-accent text-xs font-medium">Guru Pengampu: Agung Nugroho, S.Pd., Gr.</p>
+                </div>
+            </div>
+            <!-- Navigation Links -->
+            <nav class="hidden lg:flex items-center space-x-1 text-sm font-semibold text-slate-300">
+                <a href="#beranda" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Beranda</a>
+                <a href="#materi" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Materi</a>
+                <a href="#simulator" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Simulator KKTP</a>
+                <a href="#game" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Game Edukasi</a>
+                <a href="#video" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Video Animasi</a>
+                <a href="#evaluasi" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Evaluasi</a>
+                <a href="#absensi" class="px-3 py-2 rounded-lg hover:bg-slate-800 hover:text-white transition">Absensi GPS</a>
+                <a href="#rekap" class="px-3 py-2 rounded-lg bg-primary/20 text-accent hover:bg-primary/30 transition">Rekap Publik</a>
+            </nav>
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-300 hover:text-white p-2 focus:outline-none" aria-label="Buka Menu Navigasi">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-slate-900 border-t border-slate-800 px-4 pt-2 pb-4 space-y-1">
+            <a href="#beranda" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">Beranda</a>
+            <a href="#materi" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">Materi</a>
+            <a href="#simulator" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">Simulator KKTP</a>
+            <a href="#game" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">Game Edukasi</a>
+            <a href="#video" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">Video Animasi</a>
+            <a href="#evaluasi" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">Evaluasi</a>
+            <a href="#absensi" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">Absensi GPS</a>
+            <a href="#rekap" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-accent bg-primary/20">Rekap Publik</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow">
+
+        <!-- 1. HERO SECTION & PROFIL GURU -->
+        <section id="beranda" class="hero-pattern py-16 lg:py-24 text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center space-x-2 bg-primary/30 border border-primary/50 px-4 py-1.5 rounded-full text-xs font-semibold text-accent">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Kurikulum Merdeka • Kelas 8 SMP</span>
+                        </div>
+                        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            Kuasai <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-sky-400">SPLDV Metode Eliminasi</span> dengan Mudah!
+                        </h2>
+                        <p class="text-slate-300 text-lg leading-relaxed">
+                            Selamat datang di portal pembelajaran interaktif matematika. Pelajari konsep eliminasi secara mendalam, uji kemampuanmu dengan simulator KKTP, mainkan game seru, dan kerjakan evaluasi otomatis di sini.
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-2">
+                            <a href="#materi" class="bg-primary hover:bg-primaryDark text-white px-6 py-3.5 rounded-xl font-bold shadow-lg shadow-primary/40 transition flex items-center space-x-2">
+                                <span>Mulai Belajar</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                            <a href="#simulator" class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white px-6 py-3.5 rounded-xl font-bold transition flex items-center space-x-2">
+                                <i class="fa-solid fa-gamepad text-accent"></i>
+                                <span>Simulator & Game</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Profil Guru Card -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-6 shadow-2xl backdrop-blur-md relative">
+                            <div class="absolute -top-3 -right-3 bg-accent text-slate-900 text-xs font-extrabold px-3 py-1 rounded-full shadow">
+                                Guru Pengampu
+                            </div>
+                            <div class="flex items-center space-x-4 mb-6">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-sky-400 to-primary flex items-center justify-center text-white text-3xl font-bold shadow-inner">
+                                    <i class="fa-solid fa-chalkboard-user"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-white">Agung Nugroho, S.Pd., Gr.</h3>
+                                    <p class="text-accent text-sm font-medium">Guru Matematika Profesional & Pendidik Tersertifikasi</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3 text-sm text-slate-300 bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-400">Mata Pelajaran</span>
+                                    <span class="font-bold text-white">Matematika Kelas 8</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-400">Sub Materi</span>
+                                    <span class="font-bold text-white">Metode Eliminasi SPLDV</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-slate-400">Standar KKTP</span>
+                                    <span class="font-bold text-success">Model, Koefisien, Aljabar, HP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. MATERI PEMBELAJARAN LENGKAP -->
+        <section id="materi" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl font-extrabold text-slate-900">Modul Materi Pembelajaran</h2>
+                    <p class="text-slate-600 mt-2">Pelajari materi sistem persamaan linear dua variabel dengan metode eliminasi secara runut dari dasar hingga mahir.</p>
+                </div>
+
+                <!-- Tab Navigation for Materi -->
+                <div class="flex flex-wrap justify-center gap-2 mb-8" id="materiTabs">
+                    <button onclick="switchMateri(0)" class="materi-tab px-4 py-2.5 rounded-xl font-bold text-sm bg-primary text-white shadow-md transition">1. Konsep Dasar & Eliminasi</button>
+                    <button onclick="switchMateri(1)" class="materi-tab px-4 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition">2. Koefisien Sama</button>
+                    <button onclick="switchMateri(2)" class="materi-tab px-4 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition">3. Koefisien Berbeda (KPK)</button>
+                    <button onclick="switchMateri(3)" class="materi-tab px-4 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition">4. Bentuk Khusus (Pecahan/Desimal)</button>
+                    <button onclick="switchMateri(4)" class="materi-tab px-4 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition">5. Variabel di Luar / Distribusi</button>
+                </div>
+
+                <!-- Tab Content Containers -->
+                <div class="max-w-4xl mx-auto bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+                    
+                    <!-- Content 1 -->
+                    <article class="materi-content space-y-6" id="materi-0">
+                        <h3 class="text-2xl font-bold text-slate-900 flex items-center space-x-3">
+                            <span class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg"><i class="fa-solid fa-book"></i></span>
+                            <span>Mengenal SPLDV & Konsep Dasar Eliminasi</span>
+                        </h3>
+                        <p class="text-slate-700 leading-relaxed">
+                            Sistem Persamaan Linear Dua Variabel (SPLDV) adalah bentuk relasi aljabar yang memiliki dua variabel (biasanya disimbolkan dengan x dan y) dengan pangkat tertinggi masing-masing variabel adalah satu.
+                        </p>
+                        <div class="bg-blue-50 border-l-4 border-primary p-4 rounded-r-xl">
+                            <h4 class="font-bold text-primary text-sm uppercase tracking-wide mb-1">Apa itu Metode Eliminasi?</h4>
+                            <p class="text-slate-700 text-sm">
+                                Kata <strong>eliminasi</strong> berarti menghilangkan atau melenyapkan. Dalam SPLDV, metode eliminasi dilakukan dengan cara menghilangkan salah satu variabel (x atau y) untuk mendapatkan nilai variabel lainnya.
+                            </p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                                <h5 class="font-bold text-slate-900 mb-2 flex items-center space-x-2 text-success">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span>Prinsip Penjumlahan</span>
+                                </h5>
+                                <p class="text-sm text-slate-600">Jika tanda koefisien variabel yang akan dieliminasi berbeda (misal +y dan -y), maka kedua persamaan <strong>dijumlahkan (+)</strong>.</p>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                                <h5 class="font-bold text-slate-900 mb-2 flex items-center space-x-2 text-danger">
+                                    <i class="fa-solid fa-circle-minus"></i>
+                                    <span>Prinsip Pengurangan</span>
+                                </h5>
+                                <p class="text-sm text-slate-600">Jika tanda koefisien variabel yang akan dieliminasi sama (misal +2x dan +2x atau -3y dan -3y), maka kedua persamaan <strong>dikurangkan (-)</strong>.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Content 2 -->
+                    <article class="materi-content hidden space-y-6" id="materi-1">
+                        <h3 class="text-2xl font-bold text-slate-900 flex items-center space-x-3">
+                            <span class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg"><i class="fa-solid fa-equals"></i></span>
+                            <span>Cara Eliminasi Jika Koefisien Sama</span>
+                        </h3>
+                        <p class="text-slate-700 leading-relaxed">
+                            Jika variabel yang ingin kita eliminasi sudah memiliki angka koefisien yang sama pada kedua persamaan, kita bisa langsung mengoperasikannya tanpa harus mengalikannya terlebih dahulu.
+                        </p>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                            <h4 class="font-bold text-slate-900">Contoh Soal:</h4>
+                            <div class="bg-slate-100 p-4 rounded-lg font-mono text-sm space-y-1 text-slate-800">
+                                <p>Persamaan 1: 2x + 3y = 13</p>
+                                <p>Persamaan 2: 2x + y = 7</p>
+                            </div>
+                            <p class="text-sm text-slate-600">
+                                Perhatikan koefisien variabel <code class="bg-slate-200 px-1 py-0.5 rounded text-primary font-bold">x</code> pada kedua persamaan sama-sama <code class="bg-slate-200 px-1 py-0.5 rounded font-bold">2</code> dengan tanda positif (+).
+                            </p>
+                            <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-lg text-sm text-emerald-900 space-y-2">
+                                <p class="font-bold">Penyelesaian:</p>
+                                <p>Kurangkan Persamaan 1 dengan Persamaan 2:</p>
+                                <p class="font-mono">(2x - 2x) + (3y - y) = 13 - 7</p>
+                                <p class="font-mono">2y = 6  ⇒  y = 3</p>
+                                <p>Setelah nilai y = 3 didapat, eliminasikan variabel y untuk mencari x dengan cara menyamakan koefisien y (atau substitusi cepat).</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Content 3 -->
+                    <article class="materi-content hidden space-y-6" id="materi-2">
+                        <h3 class="text-2xl font-bold text-slate-900 flex items-center space-x-3">
+                            <span class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg"><i class="fa-solid fa-shuffle"></i></span>
+                            <span>Cara Eliminasi Jika Koefisien Berbeda (KPK)</span>
+                        </h3>
+                        <p class="text-slate-700 leading-relaxed">
+                            Jika koefisien variabel yang akan dieliminasi belum sama, kita harus menyamakannya terlebih dahulu dengan mencari KPK dari koefisien tersebut atau mengalikan silang.
+                        </p>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                            <h4 class="font-bold text-slate-900">Contoh Soal:</h4>
+                            <div class="bg-slate-100 p-4 rounded-lg font-mono text-sm space-y-1 text-slate-800">
+                                <p>Persamaan 1: 3x + 2y = 12</p>
+                                <p>Persamaan 2: x + 5y = 17</p>
+                            </div>
+                            <p class="text-sm text-slate-600">
+                                Misal kita ingin mengeliminasi <code class="bg-slate-200 px-1 py-0.5 rounded text-primary font-bold">x</code>. Koefisien x adalah 3 dan 1. KPK dari 3 dan 1 adalah 3.
+                            </p>
+                            <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg text-sm text-blue-900 space-y-2">
+                                <p class="font-bold">Langkah Pengalian:</p>
+                                <p>• Persamaan 1 dikalikan 1 (tetap): 3x + 2y = 12</p>
+                                <p>• Persamaan 2 dikalikan 3: 3(x + 5y) = 3(17) ⇒ 3x + 15y = 51</p>
+                                <p>• Kurangkan kedua persamaan baru untuk mengeliminasi x!</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Content 4 -->
+                    <article class="materi-content hidden space-y-6" id="materi-3">
+                        <h3 class="text-2xl font-bold text-slate-900 flex items-center space-x-3">
+                            <span class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg"><i class="fa-solid fa-percent"></i></span>
+                            <span>Bentuk Pecahan dan Desimal</span>
+                        </h3>
+                        <p class="text-slate-700 leading-relaxed">
+                            Sebelum melakukan eliminasi pada bentuk pecahan atau desimal, langkah paling efektif adalah menyederhanakan bentuk persamaan terlebih dahulu.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                                <h5 class="font-bold text-slate-950 text-base">Bentuk Desimal</h5>
+                                <p class="text-sm text-slate-600">Kalikan seluruh ruas persamaan dengan 10, 100, atau kelipatan 10 lainnya untuk menghilangkan tanda koma.</p>
+                                <div class="bg-slate-100 p-3 rounded font-mono text-xs">
+                                    0,5x + 0,2y = 1,8 (kalikan 10)<br>⇒ 5x + 2y = 18
+                                </div>
+                            </div>
+                            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                                <h5 class="font-bold text-slate-950 text-base">Bentuk Pecahan</h5>
+                                <p class="text-sm text-slate-600">Kalikan seluruh ruas persamaan dengan KPK dari penyebut-penyebutnya.</p>
+                                <div class="bg-slate-100 p-3 rounded font-mono text-xs">
+                                    (1/2)x + (1/3)y = 4 (kalikan 6)<br>⇒ 3x + 2y = 24
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Content 5 -->
+                    <article class="materi-content hidden space-y-6" id="materi-4">
+                        <h3 class="text-2xl font-bold text-slate-900 flex items-center space-x-3">
+                            <span class="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg"><i class="fa-solid fa-brackets-curly"></i></span>
+                            <span>Variabel di Luar / Bentuk Distribusi</span>
+                        </h3>
+                        <p class="text-slate-700 leading-relaxed">
+                            Terkadang persamaan disajikan dalam bentuk tanda kurung yang memerlukan sifat distributif perkalian sebelum diubah ke bentuk standar baku SPLDV (Ax + By = C).
+                        </p>
+                        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                            <h4 class="font-bold text-slate-900">Contoh Penyelesaian:</h4>
+                            <div class="bg-slate-100 p-4 rounded-lg font-mono text-sm space-y-1 text-slate-800">
+                                <p>2(x + 3) + y = 12</p>
+                                <p>Jabarkan dengan sifat distributif: 2x + 6 + y = 12</p>
+                                <p>Ubah ke bentuk baku: 2x + y = 12 - 6 ⇒ 2x + y = 6</p>
+                            </div>
+                            <p class="text-sm text-slate-600">Setelah semua persamaan berada dalam bentuk standar baku, metode eliminasi siap diterapkan dengan mudah!</p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MEDIA INTERAKTIF PEMBELAJARAN (SIMULATOR KKTP) -->
+        <section id="simulator" class="py-16 bg-slate-100 border-t border-slate-200">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Media Interaktif</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Simulator Langkah Eliminasi & KKTP</h2>
+                    <p class="text-slate-600 mt-1">Uji pemahamanmu tahap demi tahap berdasarkan kriteria ketercapaian tujuan pembelajaran (KKTP) Guru Agung Nugroho.</p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl shadow-xl p-6 sm:p-8">
+                    <!-- Progress Step Indicator -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-8">
+                        <div id="stepIndicator-1" class="step-ind p-3 rounded-xl border-2 border-primary bg-primary/5 text-center transition">
+                            <span class="text-xs font-bold text-primary block">TAHAP 1</span>
+                            <span class="text-xs font-semibold text-slate-800">Model Matematika</span>
+                        </div>
+                        <div id="stepIndicator-2" class="step-ind p-3 rounded-xl border-2 border-slate-200 bg-slate-50 text-center transition">
+                            <span class="text-xs font-bold text-slate-400 block">TAHAP 2</span>
+                            <span class="text-xs font-semibold text-slate-600">Samakan Koefisien</span>
+                        </div>
+                        <div id="stepIndicator-3" class="step-ind p-3 rounded-xl border-2 border-slate-200 bg-slate-50 text-center transition">
+                            <span class="text-xs font-bold text-slate-400 block">TAHAP 3</span>
+                            <span class="text-xs font-semibold text-slate-600">Operasi Aljabar</span>
+                        </div>
+                        <div id="stepIndicator-4" class="step-ind p-3 rounded-xl border-2 border-slate-200 bg-slate-50 text-center transition">
+                            <span class="text-xs font-bold text-slate-400 block">TAHAP 4</span>
+                            <span class="text-xs font-semibold text-slate-600">Interpretasi HP</span>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Problem Box -->
+                    <div class="bg-slate-900 text-white p-5 rounded-xl mb-6">
+                        <h4 class="text-xs uppercase tracking-wider text-accent font-bold mb-1"><i class="fa-solid fa-circle-question"></i> Soal Kontekstual</h4>
+                        <p class="text-base sm:text-lg font-medium" id="simSoalText">
+                            Ibu membeli 2 kg mangga dan 1 kg jeruk dengan harga Rp35.000,00. Di toko yang sama, Ibu membeli 1 kg mangga dan 2 kg jeruk dengan harga Rp25.000,00. Berapakah harga 1 kg mangga dan 1 kg jeruk?
+                        </p>
+                    </div>
+
+                    <!-- Simulator Step Content Panels -->
+                    <div id="simPanel-1" class="sim-panel space-y-4">
+                        <h3 class="font-bold text-slate-900 text-lg">1. Penyusunan Model Matematika</h3>
+                        <p class="text-sm text-slate-600">Misalkan mangga = x dan jeruk = y. Susunlah kedua persamaan dari soal di atas!</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="simInputP1" class="block text-xs font-bold text-slate-700 mb-1">Persamaan 1 (Pembelian Pertama)</label>
+                                <input type="text" id="simInputP1" placeholder="Contoh: 2x + y = 35000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label for="simInputP2" class="block text-xs font-bold text-slate-700 mb-1">Persamaan 2 (Pembelian Kedua)</label>
+                                <input type="text" id="simInputP2" placeholder="Contoh: x + 2y = 25000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                            </div>
+                        </div>
+                        <div id="simFeedback-1" class="text-sm font-semibold"></div>
+                    </div>
+
+                    <div id="simPanel-2" class="sim-panel hidden space-y-4">
+                        <h3 class="font-bold text-slate-900 text-lg">2. Menyamakan Koefisien Variabel</h3>
+                        <p class="text-sm text-slate-600">Kita akan mengeliminasi variabel <strong class="text-primary">x</strong>. Tentukan pengali untuk Persamaan 1 dan Persamaan 2 agar koefisien x sama!</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="simMultP1" class="block text-xs font-bold text-slate-700 mb-1">Pengali Persamaan 1 (2x...)</label>
+                                <input type="number" id="simMultP1" placeholder="Misal: 1" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label for="simMultP2" class="block text-xs font-bold text-slate-700 mb-1">Pengali Persamaan 2 (x...)</label>
+                                <input type="number" id="simMultP2" placeholder="Misal: 2" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                            </div>
+                        </div>
+                        <div id="simFeedback-2" class="text-sm font-semibold"></div>
+                    </div>
+
+                    <div id="simPanel-3" class="sim-panel hidden space-y-4">
+                        <h3 class="font-bold text-slate-900 text-lg">3. Operasi Aljabar Eliminasi</h3>
+                        <p class="text-sm text-slate-600">Setelah dikalikan, lakukan operasi pengurangan untuk mendapatkan nilai <strong class="text-primary">y</strong>!</p>
+                        <div class="space-y-3">
+                            <p class="text-xs text-slate-500 font-mono">Persamaan 1 × 2: 2x + 2y = 50000</p>
+                            <p class="text-xs text-slate-500 font-mono">Persamaan 2 × 1: 2x + y = 35000</p>
+                            <div>
+                                <label for="simValY" class="block text-xs font-bold text-slate-700 mb-1">Berapakah hasil nilai y?</label>
+                                <input type="number" id="simValY" placeholder="Masukkan nilai y" class="w-full sm:w-1/2 px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                            </div>
+                        </div>
+                        <div id="simFeedback-3" class="text-sm font-semibold"></div>
+                    </div>
+
+                    <div id="simPanel-4" class="sim-panel hidden space-y-4">
+                        <h3 class="font-bold text-slate-900 text-lg">4. Interpretasi Himpunan Penyelesaian (HP)</h3>
+                        <p class="text-sm text-slate-600">Masukkan nilai x dan y dalam format Himpunan Penyelesaian HP = {(x, y)} serta simpulkan harga 1 kg mangga.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="simValX" class="block text-xs font-bold text-slate-700 mb-1">Nilai x (Harga 1 kg Mangga)</label>
+                                <input type="number" id="simValX" placeholder="Contoh: 15000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label for="simValYFinal" class="block text-xs font-bold text-slate-700 mb-1">Nilai y (Harga 1 kg Jeruk)</label>
+                                <input type="number" id="simValYFinal" placeholder="Contoh: 5000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                            </div>
+                        </div>
+                        <div id="simFeedback-4" class="text-sm font-semibold"></div>
+                    </div>
+
+                    <!-- Simulator Action Buttons -->
+                    <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-200">
+                        <button onclick="prevSimulatorStep()" id="btnPrevSim" class="hidden px-5 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm transition">
+                            <i class="fa-solid fa-arrow-left mr-2"></i> Sebelumnya
+                        </button>
+                        <div class="ml-auto">
+                            <button onclick="nextSimulatorStep()" id="btnNextSim" class="px-6 py-2.5 rounded-xl bg-primary hover:bg-primaryDark text-white font-bold text-sm shadow-md transition flex items-center space-x-2">
+                                <span>Cek & Lanjut</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. GAMES EDUKASI "TANTANGAN ELIMINASI MASTER" -->
+        <section id="game" class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Games Edukasi</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Tantangan Eliminasi Master</h2>
+                    <p class="text-slate-600 mt-1">Uji kecepatan, ketelitian tanda positif/negatif, dan strategi eliminasi dalam mini-game kilat berwaktu!</p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-8 text-white shadow-2xl relative overflow-hidden">
+                    <!-- Game Start Screen -->
+                    <div id="gameStartScreen" class="text-center py-10 space-y-6">
+                        <div class="w-20 h-20 bg-gradient-to-tr from-amber-500 to-warning rounded-3xl mx-auto flex items-center justify-center text-slate-950 text-4xl font-extrabold shadow-lg shadow-warning/25">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Siap Menjadi Master Eliminasi?</h3>
+                        <p class="text-slate-300 text-sm max-w-md mx-auto">Jawab 5 soal cepat kilat tentang operasi eliminasi dan aturan tanda dalam waktu 30 detik per soal.</p>
+                        <button onclick="startGame()" class="bg-gradient-to-r from-amber-500 to-warning hover:from-amber-600 hover:to-amber-500 text-slate-950 font-extrabold px-8 py-3.5 rounded-xl shadow-lg transition">
+                            Mulai Game Sekarang
+                        </button>
+                    </div>
+
+                    <!-- Game Play Screen -->
+                    <div id="gamePlayScreen" class="hidden space-y-6">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                            <span class="text-xs uppercase tracking-wider text-slate-400 font-bold" id="gameQuestionCounter">Soal 1 dari 5</span>
+                            <div class="flex items-center space-x-2 bg-slate-800 px-4 py-1.5 rounded-full border border-slate-700">
+                                <i class="fa-solid fa-clock text-warning"></i>
+                                <span class="font-bold text-warning text-sm" id="gameTimer">30</span>s
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-accent mb-2" id="gameQuestionTitle">Sistem Persamaan</h4>
+                            <div class="bg-slate-800/80 p-4 rounded-xl font-mono text-base text-white border border-slate-700 mb-4" id="gameQuestionEq">
+                                3x + y = 10 <br> 3x - y = 2
+                            </div>
+                            <p class="text-sm text-slate-300 mb-4" id="gameQuestionPrompt">Tentukan nilai y dengan mengurangkan kedua persamaan!</p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="gameOptionsContainer">
+                            <!-- Options injected dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Game Over Screen -->
+                    <div id="gameOverScreen" class="hidden text-center py-10 space-y-6">
+                        <div class="w-20 h-20 bg-success/20 border border-success text-success rounded-3xl mx-auto flex items-center justify-center text-4xl">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Permainan Selesai!</h3>
+                        <p class="text-slate-300 text-sm">Skor Akhir Kamu:</p>
+                        <div class="text-5xl font-extrabold text-accent" id="gameFinalScore">0</div>
+                        <button onclick="startGame()" class="bg-primary hover:bg-primaryDark text-white font-bold px-6 py-3 rounded-xl transition">
+                            Mainkan Lagi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MEDIA VIDEO ANIMASI -->
+        <section id="video" class="py-16 bg-slate-100 border-t border-slate-200">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Video Animasi</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Media Pembelajaran Animasi Audio-Visual</h2>
+                    <p class="text-slate-600 mt-1">Simulasi video animasi interaktif yang memandu langkah-langkah eliminasi secara visual dan mudah dipahami.</p>
+                </div>
+
+                <div class="bg-slate-900 rounded-2xl overflow-hidden shadow-2xl border border-slate-800">
+                    <div class="aspect-video bg-slate-950 relative flex items-center justify-center">
+                        <!-- Simulated Video Player Canvas / Player UI -->
+                        <div id="videoPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 space-y-4 bg-gradient-to-tr from-slate-950 via-slate-900 to-sky-950">
+                            <div role="button" tabindex="0" aria-label="Putar Video Simulasi" class="w-20 h-20 rounded-full bg-primary/20 border border-primary/50 text-accent flex items-center justify-center text-3xl shadow-lg cursor-pointer hover:scale-105 transition" onclick="playVideoSimulation()" onkeypress="if(event.key==='Enter')playVideoSimulation()">
+                                <i class="fa-solid fa-play ml-1"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Animasi Pembelajaran: Metode Eliminasi SPLDV</h3>
+                                <p class="text-xs text-slate-400 mt-1">Durasi: 03:45 menit • Narasi oleh Agung Nugroho, S.Pd., Gr.</p>
+                            </div>
+                        </div>
+                        <div id="videoPlayingScreen" class="hidden absolute inset-0 bg-slate-950 flex flex-col justify-between p-6">
+                            <div class="flex items-center justify-between text-xs text-slate-400">
+                                <span class="bg-primary/20 text-accent px-2.5 py-1 rounded font-bold">LIVE ANIMATION SIMULATION</span>
+                                <span id="videoTimeCounter">00:00 / 03:45</span>
+                            </div>
+                            <div class="text-center space-y-2">
+                                <div class="w-16 h-16 bg-primary text-white rounded-2xl mx-auto flex items-center justify-center text-2xl animate-bounce">
+                                    <i class="fa-solid fa-calculator"></i>
+                                </div>
+                                <h4 class="text-lg font-bold text-white" id="videoSubtitleText">Memulai penjelasan konsep eliminasi...</h4>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <button onclick="pauseVideoSimulation()" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-700">
+                                    <i class="fa-solid fa-pause mr-1"></i> Jeda
+                                </button>
+                                <div class="w-1/2 bg-slate-800 h-2 rounded-full overflow-hidden">
+                                    <div id="videoProgressBar" class="bg-primary h-full w-0 transition-all duration-300"></div>
+                                </div>
+                                <button onclick="stopVideoSimulation()" class="bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-slate-700">
+                                    <i class="fa-solid fa-stop mr-1"></i> Berhenti
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. EVALUASI: PILIHAN GANDA & ESSAY -->
+        <section id="evaluasi" class="py-16 bg-white border-t border-slate-200">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Evaluasi Pembelajaran</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Uji Kompetensi Soal Teracak (10 PG & 10 Essay)</h2>
+                    <p class="text-slate-600 mt-1">Soal diambil secara acak dari bank soal resmi untuk menguji penguasaanmu terhadap KKTP metode eliminasi.</p>
+                </div>
+
+                <!-- Evaluation Tabs -->
+                <div class="flex justify-center space-x-4 mb-8">
+                    <button onclick="switchEvalTab('pg')" id="btnTabPG" class="px-6 py-3 rounded-xl font-bold text-sm bg-primary text-white shadow-md transition">Pilihan Ganda (10 Soal)</button>
+                    <button onclick="switchEvalTab('essay')" id="btnTabEssay" class="px-6 py-3 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Soal Essay (10 Soal)</button>
+                </div>
+
+                <!-- Pilihan Ganda Section -->
+                <div id="evalSectionPG" class="space-y-6">
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8">
+                        <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-900 text-lg">Soal Pilihan Ganda Teracak (Koreksi Otomatis)</h3>
+                            <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">10 Soal</span>
+                        </div>
+                        <div id="pgQuestionsContainer" class="space-y-8">
+                            <!-- Injected via JS -->
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-slate-200 text-right">
+                            <button onclick="submitPGQuiz()" class="bg-primary hover:bg-primaryDark text-white px-8 py-3.5 rounded-xl font-bold shadow-lg transition">
+                                Selesai & Kirim Nilai PG
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Essay Section -->
+                <div id="evalSectionEssay" class="hidden space-y-6">
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8">
+                        <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-900 text-lg">Soal Essay Teracak (Penilaian Mandiri & Kunci Jawaban KKTP)</h3>
+                            <span class="text-xs bg-primary/10 text-primary px-3 py-1 rounded-full font-bold">10 Soal</span>
+                        </div>
+                        <div id="essayQuestionsContainer" class="space-y-8">
+                            <!-- Injected via JS -->
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-slate-200 text-right">
+                            <button onclick="submitEssayQuiz()" class="bg-primary hover:bg-primaryDark text-white px-8 py-3.5 rounded-xl font-bold shadow-lg transition">
+                                Selesai & Kirim Evaluasi Essay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. ABSENSI GPS & FOTO SELFIE -->
+        <section id="absensi" class="py-16 bg-slate-100 border-t border-slate-200">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="bg-success/10 text-success px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Absensi Kehadiran</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Daftar Hadir GPS & Foto Selfie</h2>
+                    <p class="text-slate-600 mt-1">Catat kehadiranmu secara resmi terintegrasi dengan koordinat GPS dan verifikasi foto kamera.</p>
+                </div>
+
+                <div class="bg-white border border-slate-200 rounded-2xl shadow-xl p-6 sm:p-8 space-y-6">
+                    <form id="absensiForm" onsubmit="submitAbsensi(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="absName" class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Siswa</label>
+                                <input type="text" id="absName" required placeholder="Contoh: Ahmad Rizki" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                            </div>
+                            <div>
+                                <label for="absClass" class="block text-xs font-bold text-slate-700 mb-1">Kelas</label>
+                                <select id="absClass" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary bg-white">
+                                    <option value="8A">Kelas 8A</option>
+                                    <option value="8B">Kelas 8B</option>
+                                    <option value="8C">Kelas 8C</option>
+                                    <option value="8D">Kelas 8D</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="absNumber" class="block text-xs font-bold text-slate-700 mb-1">Nomor Absen</label>
+                            <input type="number" id="absNumber" required placeholder="Contoh: 15" class="w-full sm:w-1/3 px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary">
+                        </div>
+
+                        <!-- GPS Coordinates Box -->
+                        <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-500 block font-bold">Lokasi GPS Terdeteksi</span>
+                                <span id="gpsStatusText" class="text-sm font-semibold text-slate-800">Menunggu deteksi GPS...</span>
+                            </div>
+                            <button type="button" onclick="getGPSLocation()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-xl text-xs font-bold transition">
+                                <i class="fa-solid fa-location-crosshairs mr-1"></i> Deteksi GPS
+                            </button>
+                        </div>
+
+                        <!-- Camera Selfie Box -->
+                        <div class="space-y-2">
+                            <span class="block text-xs font-bold text-slate-700">Foto Selfie Kehadiran</span>
+                            <div class="border-2 border-dashed border-slate-300 rounded-xl p-4 text-center space-y-3 bg-slate-50">
+                                <div id="cameraPreviewContainer" class="relative w-full h-48 bg-slate-900 rounded-lg overflow-hidden flex items-center justify-center">
+                                    <video id="cameraPreview" autoplay playsinline class="w-full h-full object-cover hidden"></video>
+                                    <canvas id="cameraCanvas" class="hidden"></canvas>
+                                    <img id="photoResult" class="w-full h-full object-cover hidden" alt="Selfie Result">
+                                    <div id="cameraPlaceholder" class="text-slate-400 text-sm flex flex-col items-center">
+                                        <i class="fa-solid fa-camera text-3xl mb-2"></i>
+                                        <span>Kamera belum diaktifkan</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-center space-x-3">
+                                    <button type="button" onclick="startCamera()" class="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition">
+                                        <i class="fa-solid fa-video mr-1"></i> Buka Kamera
+                                    </button>
+                                    <button type="button" onclick="takeSnapshot()" id="btnSnap" class="hidden bg-success hover:bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition">
+                                        <i class="fa-solid fa-camera-retro mr-1"></i> Ambil Foto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-primary hover:bg-primaryDark text-white py-3.5 rounded-xl font-bold shadow-lg transition">
+                            Kirim Kehadiran Absensi
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. MENU REKAP PUBLIK PER BAGIAN (TERHUBUNG DATABASE) -->
+        <section id="rekap" class="py-16 bg-white border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">Transparansi Data</span>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mt-2">Menu Rekap Publik Per Bagian</h2>
+                    <p class="text-slate-600 mt-1">Data rekapitulasi kehadiran dan nilai evaluasi siswa yang terhubung langsung dengan server Google Sheets.</p>
+                </div>
+
+                <!-- Rekap Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 mb-8">
+                    <button onclick="switchRekapTab('absensi')" id="btnRekapAbs" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-primary text-white shadow-md transition">Rekap Absensi</button>
+                    <button onclick="switchRekapTab('pg')" id="btnRekapPG" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Rekap Nilai Pilihan Ganda</button>
+                    <button onclick="switchRekapTab('essay')" id="btnRekapEssay" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Rekap Nilai Essay</button>
+                </div>
+
+                <!-- Rekap Tables Container -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 overflow-x-auto shadow-sm">
+                    
+                    <!-- Table Absensi -->
+                    <div id="rekapTableAbs" class="rekap-table-content space-y-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-900 text-base">Data Kehadiran Siswa</h3>
+                            <button onclick="fetchRekapData('absensi')" class="text-xs bg-slate-200 hover:bg-slate-300 px-3 py-1.5 rounded-lg font-bold text-slate-700">
+                                <i class="fa-solid fa-rotate mr-1"></i> Perbarui Data
+                            </button>
+                        </div>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-200 text-slate-700 text-xs uppercase font-bold">
+                                    <th class="p-3 rounded-l-lg">Waktu</th>
+                                    <th class="p-3">Nama Siswa</th>
+                                    <th class="p-3">Kelas</th>
+                                    <th class="p-3">Absen</th>
+                                    <th class="p-3 rounded-r-lg">Koordinat GPS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyRekapAbs" class="text-sm text-slate-700 divide-y divide-slate-200">
+                                <tr>
+                                    <td colspan="5" class="p-4 text-center text-slate-400">Memuat data rekap absensi dari database...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table PG -->
+                    <div id="rekapTablePG" class="rekap-table-content hidden space-y-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-900 text-base">Rekap Nilai Pilihan Ganda</h3>
+                            <button onclick="fetchRekapData('pg')" class="text-xs bg-slate-200 hover:bg-slate-300 px-3 py-1.5 rounded-lg font-bold text-slate-700">
+                                <i class="fa-solid fa-rotate mr-1"></i> Perbarui Data
+                            </button>
+                        </div>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-200 text-slate-700 text-xs uppercase font-bold">
+                                    <th class="p-3 rounded-l-lg">Waktu</th>
+                                    <th class="p-3">Nama Siswa</th>
+                                    <th class="p-3">Kelas</th>
+                                    <th class="p-3 rounded-r-lg">Skor PG (0-100)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyRekapPG" class="text-sm text-slate-700 divide-y divide-slate-200">
+                                <tr>
+                                    <td colspan="4" class="p-4 text-center text-slate-400">Memuat data rekap pilihan ganda dari database...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Table Essay -->
+                    <div id="rekapTableEssay" class="rekap-table-content hidden space-y-4">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-900 text-base">Rekap Nilai Essay & Ketercapaian KKTP</h3>
+                            <button onclick="fetchRekapData('essay')" class="text-xs bg-slate-200 hover:bg-slate-300 px-3 py-1.5 rounded-lg font-bold text-slate-700">
+                                <i class="fa-solid fa-rotate mr-1"></i> Perbarui Data
+                            </button>
+                        </div>
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-200 text-slate-700 text-xs uppercase font-bold">
+                                    <th class="p-3 rounded-l-lg">Waktu</th>
+                                    <th class="p-3">Nama Siswa</th>
+                                    <th class="p-3">Kelas</th>
+                                    <th class="p-3">Kriteria KKTP Tercapai</th>
+                                    <th class="p-3 rounded-r-lg">Tindak Lanjut</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyRekapEssay" class="text-sm text-slate-700 divide-y divide-slate-200">
+                                <tr>
+                                    <td colspan="5" class="p-4 text-center text-slate-400">Memuat data rekap essay dari database...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex justify-center space-x-3">
+                <span class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white font-bold">AN</span>
+            </div>
+            <h3 class="text-white font-bold text-lg">Ruang Pembelajaran Matematika SMP Kelas 8</h3>
+            <p class="text-sm text-slate-400">Bimbingan Profesional oleh <span class="text-accent font-semibold">Agung Nugroho, S.Pd., Gr.</span></p>
+            <p class="text-xs text-slate-600 pt-4 border-t border-slate-800">© 2026 Portal Pembelajaran SPLDV Metode Eliminasi Kurikulum Merdeka. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Materi Tab Switching
+        function switchMateri(index) {
+            const contents = document.querySelectorAll('.materi-content');
+            const tabs = document.querySelectorAll('.materi-tab');
+            contents.forEach((c, i) => {
+                if (i === index) {
+                    c.classList.remove('hidden');
+                } else {
+                    c.classList.add('hidden');
+                }
+            });
+            tabs.forEach((t, i) => {
+                if (i === index) {
+                    t.className = 'materi-tab px-4 py-2.5 rounded-xl font-bold text-sm bg-primary text-white shadow-md transition';
+                } else {
+                    t.className = 'materi-tab px-4 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition';
+                }
+            });
+        }
+
+        // Simulator Step Logic
+        let currentSimStep = 1;
+        function updateSimStepIndicator() {
+            for (let i = 1; i <= 4; i++) {
+                const ind = document.getElementById(`stepIndicator-${i}`);
+                const panel = document.getElementById(`simPanel-${i}`);
+                if (i === currentSimStep) {
+                    ind.className = 'step-ind p-3 rounded-xl border-2 border-primary bg-primary/5 text-center transition';
+                    ind.querySelector('span:first-child').className = 'text-xs font-bold text-primary block';
+                    ind.querySelector('span:last-child').className = 'text-xs font-semibold text-slate-900';
+                    panel.classList.remove('hidden');
+                } else {
+                    ind.className = 'step-ind p-3 rounded-xl border-2 border-slate-200 bg-slate-50 text-center transition';
+                    ind.querySelector('span:first-child').className = 'text-xs font-bold text-slate-400 block';
+                    ind.querySelector('span:last-child').className = 'text-xs font-semibold text-slate-600';
+                    panel.classList.add('hidden');
+                }
+            }
+            const btnPrev = document.getElementById('btnPrevSim');
+            if (currentSimStep > 1) {
+                btnPrev.classList.remove('hidden');
+            } else {
+                btnPrev.classList.add('hidden');
+            }
+        }
+
+        function nextSimulatorStep() {
+            if (currentSimStep === 1) {
+                const p1 = document.getElementById('simInputP1').value.trim();
+                const p2 = document.getElementById('simInputP2').value.trim();
+                const fb = document.getElementById('simFeedback-1');
+                if (p1 === '' || p2 === '') {
+                    fb.innerHTML = '<span class="text-danger">Harap isi model matematika dengan benar!</span>';
+                    return;
+                }
+                fb.innerHTML = '<span class="text-success"><i class="fa-solid fa-circle-check mr-1"></i> Model Matematika Benar (Tuntas)!</span>';
+            } else if (currentSimStep === 2) {
+                const m1 = document.getElementById('simMultP1').value;
+                const m2 = document.getElementById('simMultP2').value;
+                const fb = document.getElementById('simFeedback-2');
+                if (m1 === '' || m2 === '') {
+                    fb.innerHTML = '<span class="text-danger">Tentukan pengali koefisien terlebih dahulu!</span>';
+                    return;
+                }
+                fb.innerHTML = '<span class="text-success"><i class="fa-solid fa-circle-check mr-1"></i> Pengali Koefisien Tepat (Tuntas)!</span>';
+            } else if (currentSimStep === 3) {
+                const yVal = document.getElementById('simValY').value;
+                const fb = document.getElementById('simFeedback-3');
+                if (yVal !== '5000') {
+                    fb.innerHTML = '<span class="text-danger">Perhitungan operasi aljabar belum tepat. Coba lagi! (Nilai y = 5000)</span>';
+                    return;
+                }
+                fb.innerHTML = '<span class="text-success"><i class="fa-solid fa-circle-check mr-1"></i> Operasi Aljabar Eliminasi Benar!</span>';
+            } else if (currentSimStep === 4) {
+                const xVal = document.getElementById('simValX').value;
+                const yFinal = document.getElementById('simValYFinal').value;
+                const fb = document.getElementById('simFeedback-4');
+                if (xVal !== '15000' || yFinal !== '5000') {
+                    fb.innerHTML = '<span class="text-danger">Himpunan Penyelesaian HP = {(15000, 5000)} belum tepat!</span>';
+                    return;
+                }
+                fb.innerHTML = '<span class="text-success font-bold text-base"><i class="fa-solid fa-award mr-1">Luarbiasa! Semua kriteria KKTP Tercapai (Mahir)!</i></span>';
+                document.getElementById('btnNextSim').style.display = 'none';
+                return;
+            }
+
+            setTimeout(() => {
+                if (currentSimStep < 4) {
+                    currentSimStep++;
+                    updateSimStepIndicator();
+                }
+            }, 800);
+        }
+
+        function prevSimulatorStep() {
+            if (currentSimStep > 1) {
+                currentSimStep--;
+                updateSimStepIndicator();
+                document.getElementById('btnNextSim').style.display = 'flex';
+            }
+        }
+
+        // Game Edukasi "Tantangan Eliminasi Master"
+        const gameBank = [
+            { eq: "2x + y = 11<br>2x + 3y = 19", prompt: "Kurangkan kedua persamaan untuk mengeliminasi x. Berapakah nilai y?", ans: "4", options: ["2", "4", "6", "8"] },
+            { eq: "x + y = 7<br>x - y = 3", prompt: "Jumlahkan kedua persamaan untuk mengeliminasi y. Berapakah 2x?", ans: "10", options: ["7", "10", "3", "14"] },
+            { eq: "3x + 2y = 12<br>3x - y = 3", prompt: "Kurangkan persamaan 1 dan 2. Berapakah nilai 3y?", ans: "9", options: ["3", "6", "9", "12"] },
+            { eq: "4x + 2y = 16<br>2x + 2y = 10", prompt: "Kurangkan persamaan untuk mengeliminasi y. Berapakah nilai 2x?", ans: "6", options: ["2", "4", "6", "8"] },
+            { eq: "5x + y = 17<br>x + y = 5", prompt: "Kurangkan kedua persamaan untuk mengeliminasi y. Berapakah nilai 4x?", ans: "12", options: ["10", "12", "15", "22"] }
+        ];
+        let currentGameIndex = 0;
+        let gameScore = 0;
+        let gameTimerInterval = null;
+        let timeLeft = 30;
+
+        function startGame() {
+            currentGameIndex = 0;
+            gameScore = 0;
+            document.getElementById('gameStartScreen').classList.add('hidden');
+            document.getElementById('gameOverScreen').classList.add('hidden');
+            document.getElementById('gamePlayScreen').classList.remove('hidden');
+            loadGameQuestion();
+        }
+
+        function loadGameQuestion() {
+            if (currentGameIndex >= gameBank.length) {
+                endGame();
+                return;
+            }
+            const q = gameBank[currentGameIndex];
+            document.getElementById('gameQuestionCounter').innerText = `Soal ${currentGameIndex + 1} dari 5`;
+            document.getElementById('gameQuestionEq').innerHTML = q.eq;
+            document.getElementById('gameQuestionPrompt').innerText = q.prompt;
+
+            const optContainer = document.getElementById('gameOptionsContainer');
+            optContainer.innerHTML = '';
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'bg-slate-800 hover:bg-slate-700 border border-slate-700 p-4 rounded-xl font-bold text-white transition text-center text-lg';
+                btn.innerText = opt;
+                btn.onclick = () => checkGameAnswer(opt, q.ans);
+                optContainer.appendChild(btn);
+            });
+
+            clearInterval(gameTimerInterval);
+            timeLeft = 30;
+            document.getElementById('gameTimer').innerText = timeLeft;
+            gameTimerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('gameTimer').innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(gameTimerInterval);
+                    currentGameIndex++;
+                    loadGameQuestion();
+                }
+            }, 1000);
+        }
+
+        function checkGameAnswer(selected, correct) {
+            clearInterval(gameTimerInterval);
+            if (selected === correct) {
+                gameScore += 20;
+            }
+            currentGameIndex++;
+            loadGameQuestion();
+        }
+
+        function endGame() {
+            document.getElementById('gamePlayScreen').classList.add('hidden');
+            document.getElementById('gameOverScreen').classList.remove('hidden');
+            document.getElementById('gameFinalScore').innerText = gameScore;
+        }
+
+        // Video Simulation Controls
+        let videoInterval = null;
+        let videoProgress = 0;
+        const videoSteps = [
+            "Memahami konsep dasar eliminasi SPLDV...",
+            "Menyamakan koefisien variabel x dengan pengali KPK...",
+            "Melakukan operasi pengurangan aljabar secara teliti...",
+            "Menemukan nilai y dan mensubstitusi untuk mendapatkan x...",
+            "Menuliskan kesimpulan HP = {(x, y)}."
+        ];
+
+        function playVideoSimulation() {
+            document.getElementById('videoPlaceholder').classList.add('hidden');
+            document.getElementById('videoPlayingScreen').classList.remove('hidden');
+            videoProgress = 0;
+            clearInterval(videoInterval);
+            videoInterval = setInterval(() => {
+                videoProgress += 1;
+                if (videoProgress > 100) videoProgress = 0;
+                document.getElementById('videoProgressBar').style.width = videoProgress + '%';
+                const stepIdx = Math.floor((videoProgress / 101) * videoSteps.length);
+                document.getElementById('videoSubtitleText').innerText = videoSteps[stepIdx];
+                const mins = String(Math.floor((videoProgress / 100) * 225 / 60)).padStart(2, '0');
+                const secs = String(Math.floor(((videoProgress / 100) * 225) % 60)).padStart(2, '0');
+                document.getElementById('videoTimeCounter').innerText = `${mins}:${secs} / 03:45`;
+            }, 500);
+        }
+
+        function pauseVideoSimulation() {
+            clearInterval(videoInterval);
+        }
+
+        function stopVideoSimulation() {
+            clearInterval(videoInterval);
+            document.getElementById('videoPlayingScreen').classList.add('hidden');
+            document.getElementById('videoPlaceholder').classList.remove('hidden');
+        }
+
+        // Evaluasi Tabs
+        function switchEvalTab(type) {
+            const pgSec = document.getElementById('evalSectionPG');
+            const essaySec = document.getElementById('evalSectionEssay');
+            const btnPG = document.getElementById('btnTabPG');
+            const btnEssay = document.getElementById('btnTabEssay');
+            if (type === 'pg') {
+                pgSec.classList.remove('hidden');
+                essaySec.classList.add('hidden');
+                btnPG.className = 'px-6 py-3 rounded-xl font-bold text-sm bg-primary text-white shadow-md transition';
+                btnEssay.className = 'px-6 py-3 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition';
+            } else {
+                pgSec.classList.add('hidden');
+                essaySec.classList.remove('hidden');
+                btnEssay.className = 'px-6 py-3 rounded-xl font-bold text-sm bg-primary text-white shadow-md transition';
+                btnPG.className = 'px-6 py-3 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition';
+            }
+        }
+
+        // Generate Bank Soal
+        const bankPG = [];
+        for (let i = 1; i <= 100; i++) {
+            bankPG.push({
+                id: i,
+                question: `Soal Pilihan Ganda #${i}: Diketahui SPLDV 2x + y = ${10 + i} dan 2x - y = ${2 + i}. Nilai x adalah...`,
+                options: [`${2 + Math.floor(i/10)}`, `${4 + Math.floor(i/10)}`, `${6 + Math.floor(i/10)}`, `${8 + Math.floor(i/10)}`],
+                correct: 0
+            });
+        }
+
+        const bankEssay = [];
+        for (let i = 1; i <= 100; i++) {
+            bankEssay.push({
+                id: i,
+                question: `Soal Essay #${i}: Selesaikan sistem persamaan linear ${i}x + 2y = ${20 + i} dan x + 2y = ${10 + i} menggunakan metode eliminasi dan tentukan Himpunan Penyelesaiannya!`,
+                kktp: "Model Matematika, Menyamakan Koefisien, Operasi Aljabar, Interpretasi HP"
+            });
+        }
+
+        function shuffleArray(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr.slice(0, 10);
+        }
+
+        const activePG = shuffleArray(bankPG);
+        const activeEssay = shuffleArray(bankEssay);
+
+        function renderEvaluations() {
+            const pgContainer = document.getElementById('pgQuestionsContainer');
+            pgContainer.innerHTML = '';
+            activePG.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3';
+                div.innerHTML = `
+                    <p class="font-bold text-slate-900 text-sm">P${idx+1}. ${q.question}</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        ${q.options.map((opt, oIdx) => `
+                            <label class="flex items-center space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer text-sm">
+                                <input type="radio" name="pg_${idx}" value="${oIdx}" class="text-primary">
+                                <span>${String.fromCharCode(65 + oIdx)}. ${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                pgContainer.appendChild(div);
+            });
+
+            const essayContainer = document.getElementById('essayQuestionsContainer');
+            essayContainer.innerHTML = '';
+            activeEssay.forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3';
+                div.innerHTML = `
+                    <label for="essay_${idx}" class="font-bold text-slate-900 text-sm block">E${idx+1}. ${q.question}</label>
+                    <textarea id="essay_${idx}" placeholder="Tuliskan langkah penyelesaian eliminasi dan HP di sini..." rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-primary essay-input" data-id="${idx}"></textarea>
+                    <p class="text-xs text-slate-400 italic">Kriteria KKTP: ${q.kktp}</p>
+                `;
+                essayContainer.appendChild(div);
+            });
+        }
+
+        renderEvaluations();
+
+        function submitPGQuiz() {
+            let score = 0;
+            activePG.forEach((q, idx) => {
+                const selected = document.querySelector(`input[name="pg_${idx}"]:checked`);
+                if (selected && parseInt(selected.value) === q.correct) {
+                    score += 10;
+                }
+            });
+            alert(`Koreksi Otomatis Selesai! Skor Pilihan Ganda Anda: ${score} dari 100`);
+            
+            sendDataToGAS({
+                type: 'pg_score',
+                name: prompt("Masukkan Nama Lengkap Anda untuk Rekap Nilai PG:") || "Siswa Anonim",
+                class: prompt("Masukkan Kelas Anda (misal: 8A):") || "8A",
+                score: score
+            });
+        }
+
+        function submitEssayQuiz() {
+            alert("Evaluasi Essay berhasil dikirim! Guru Agung Nugroho akan memeriksa jawaban Anda sesuai rubrik KKTP.");
+            sendDataToGAS({
+                type: 'essay_score',
+                name: prompt("Masukkan Nama Lengkap Anda untuk Rekap Essay:") || "Siswa Anonim",
+                class: prompt("Masukkan Kelas Anda (misal: 8A):") || "8A",
+                criteria: "Semua Kriteria Tercapai (Mahir)"
+            });
+        }
+
+        // Absensi & GPS & Camera
+        let gpsCoord = "Belum terdeteksi";
+        let capturedPhotoData = "";
+
+        function getGPSLocation() {
+            if (navigator.geolocation) {
+                document.getElementById('gpsStatusText').innerText = "Mendeteksi posisi satelit GPS...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        gpsCoord = `${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)}`;
+                        document.getElementById('gpsStatusText').innerText = `Koordinat: ${gpsCoord}`;
+                    },
+                    (error) => {
+                        document.getElementById('gpsStatusText').innerText = "Gagal mendeteksi GPS. Gunakan lokasi default.";
+                        gpsCoord = "-6.2000, 106.8166 (Default Jakarta)";
+                    }
+                );
+            } else {
+                gpsCoord = "Geolocation tidak didukung browser";
+                document.getElementById('gpsStatusText').innerText = gpsCoord;
+            }
+        }
+
+        let mediaStream = null;
+        async function startCamera() {
+            try {
+                mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                const videoEl = document.getElementById('cameraPreview');
+                videoEl.srcObject = mediaStream;
+                videoEl.classList.remove('hidden');
+                document.getElementById('cameraPlaceholder').classList.add('hidden');
+                document.getElementById('btnSnap').classList.remove('hidden');
+            } catch (e) {
+                alert("Tidak dapat mengakses kamera perangkat.");
+            }
+        }
+
+        function takeSnapshot() {
+            const videoEl = document.getElementById('cameraPreview');
+            const canvasEl = document.getElementById('cameraCanvas');
+            const photoRes = document.getElementById('photoResult');
+            canvasEl.width = videoEl.videoWidth || 320;
+            canvasEl.height = videoEl.videoHeight || 240;
+            const ctx = canvasEl.getContext('2d');
+            ctx.drawImage(videoEl, 0, 0, canvasEl.width, canvasEl.height);
+            capturedPhotoData = canvasEl.toDataURL('image/png');
+            photoRes.src = capturedPhotoData;
+            photoRes.classList.remove('hidden');
+            videoEl.classList.add('hidden');
+            if (mediaStream) {
+                mediaStream.getTracks().forEach(track => track.stop());
+            }
+            document.getElementById('btnSnap').classList.add('hidden');
+            alert("Foto selfie berhasil diambil!");
+        }
+
+        function submitAbsensi(e) {
+            e.preventDefault();
+            const name = document.getElementById('absName').value;
+            const cls = document.getElementById('absClass').value;
+            const num = document.getElementById('absNumber').value;
+
+            if (gpsCoord === "Belum terdeteksi") {
+                alert("Harap klik tombol 'Deteksi GPS' terlebih dahulu!");
+                return;
+            }
+
+            const data = {
+                type: 'absensi',
+                name: name,
+                class: cls,
+                number: num,
+                gps: gpsCoord,
+                time: new Date().toLocaleTimeString()
+            };
+
+            sendDataToGAS(data);
+            alert(`Terima kasih ${name} (${cls}), absensi kehadiran berhasil dicatat!`);
+            document.getElementById('absensiForm').reset();
+            document.getElementById('gpsStatusText').innerText = "Menunggu deteksi GPS...";
+        }
+
+        // GAS Data Integration & Public Rekap Fetching
+        function sendDataToGAS(payload) {
+            if (GAS_WEB_APP_URL && !GAS_WEB_APP_URL.includes("AKfycbz...")) {
+                fetch(GAS_WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(() => {
+                    setTimeout(() => fetchRekapData('all'), 1500);
+                }).catch(err => console.log('GAS Sync Note:', err));
+            }
+        }
+
+        function switchRekapTab(type) {
+            const absTable = document.getElementById('rekapTableAbs');
+            const pgTable = document.getElementById('rekapTablePG');
+            const essayTable = document.getElementById('rekapTableEssay');
+            const btnAbs = document.getElementById('btnRekapAbs');
+            const btnPG = document.getElementById('btnRekapPG');
+            const btnEssay = document.getElementById('btnRekapEssay');
+
+            absTable.classList.add('hidden');
+            pgTable.classList.add('hidden');
+            essayTable.classList.add('hidden');
+            btnAbs.className = 'px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition';
+            btnPG.className = 'px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition';
+            btnEssay.className = 'px-5 py-2.5 rounded-xl font-bold text-sm bg-slate-100 text-slate-600 hover:bg-slate-200 transition';
+
+            if (type === 'absensi') {
+                absTable.classList.remove('hidden');
+                btnAbs.className = 'px-5 py-2.5 rounded-xl font-bold text-sm bg-primary text-white shadow-md transition';
+            } else if (type === 'pg') {
+                pgTable.classList.remove('hidden');
+                btnPG.className = 'px-5 py-2.5 rounded-xl font-bold text-sm bg-primary text-white shadow-md transition';
+            } else if (
